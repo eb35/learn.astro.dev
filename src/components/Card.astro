@@ -1,0 +1,35 @@
+---
+interface Props {
+	picSrc: string;
+	picAlt: string;
+	badge: string;
+	title: string;
+	authorSrc: string;
+	authorName: string;
+	published: string;
+}
+
+const { picSrc, picAlt, badge, title, authorSrc, authorName, published } = Astro.props;
+---
+
+<article>
+	<figure>
+		<img src={picSrc} alt={picAlt} />
+	</figure>
+	<header>
+		<span>{badge}</span>
+		<h2>{title}</h2>
+	</header>
+	<main>
+		<slot />
+	</main>
+	<footer>
+		<figure>
+			<img src={authorSrc} alt={authorName}>
+			<figcaption>
+				<p>{authorName}</p>
+				<p>{published}</p>
+			</figcaption>
+		</figure>
+	</footer>
+</article>

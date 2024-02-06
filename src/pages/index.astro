@@ -1,16 +1,23 @@
 ---
+// layouts and components
+import BaseLayout from "./layouts/BaseLayout.astro";
+import Card from "../components/Card.astro";
 
+// images
+import car from "../assets/car.png";
+import carrie from "../assets/carrie.png";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Module One">
+	<h1>Home</h1>
+	<Card 
+		picSrc={car.src} 
+		picAlt="Red Jeep"
+		badge="Technology"
+		title="Why is the Tesla Cybertruck designed the way it is?"
+		authorSrc={carrie.src}
+		authorName="Carrie Brewer"
+		published="2h ago">
+		An exploration in the truck's polarizing design.
+	</Card>
+</BaseLayout>
