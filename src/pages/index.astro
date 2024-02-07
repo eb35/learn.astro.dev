@@ -1,5 +1,26 @@
 ---
+import {Icon} from "astro-icon/components";
 
+import Button from "../components/Button.astro";
+import Heading from "../components/Heading.astro";
+
+const headings = [
+	{
+		tagName: "h1",
+		size: "h2",
+		text: "Heading 1"
+	},
+	{
+		tagName: "h2",
+		size: "h5",
+		text: "Heading 2"
+	},
+	{
+		tagName: "h3",
+		size: "h6",
+		text: "Heading 3"
+	},
+];
 ---
 
 <html lang="en">
@@ -11,6 +32,13 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<Heading tagName="h2" size="h4" classes="big">Heading</Heading>
+		{
+			headings.map(h => (<Heading tagName={h.tagName as any} size={h.size as any}>{h.text}</Heading>))
+		}
+		<Button classes="large funny" id="my-button" isBordered background="white" color="black">
+			<span>I'm a button</span>
+			<Icon name="mdi:github" size={40} />
+		</Button>
 	</body>
 </html>
