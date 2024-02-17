@@ -1,5 +1,8 @@
 ---
-
+import type { Code, Debug } from "astro:components";
+import PricingCard from "../components/PricingCard.astro";
+import data from "../data/cardData.json";
+console.log(data);
 ---
 
 <html lang="en">
@@ -11,6 +14,8 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		{
+			data && data.length && data.map(d => <PricingCard {...d} />)
+		}
 	</body>
 </html>

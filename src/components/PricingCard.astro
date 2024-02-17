@@ -1,0 +1,53 @@
+---
+interface Features {
+    title: string;
+    checked: boolean;
+}
+
+interface Props {
+    tier: string;
+    most_popular: boolean;
+    amount_per_month: number;
+    title: string;
+    description: string;
+    btn_text: string;
+    features: Features[];
+}
+
+const {
+    tier,
+    most_popular,
+    amount_per_month,
+    title,
+    description,
+    btn_text,
+    features,
+    ...rest
+} = Astro.props;
+---
+
+<article class="border-2 border-orange-500">
+    <p>{tier}</p>
+    {
+        most_popular && <p>Most Popular</p>
+    }
+    <div>
+        <div>
+            <span>$</span>
+            <span>{amount_per_month}</span>
+            <span>/mo</span>
+        </div>
+        <div>{title}</div>
+        <p>{description}</p>
+    </div>
+    <a href="#">{btn_text}</a>
+    {
+        features && 
+        features.length && 
+        <ul>
+            {
+                features.map(f => <li>{f.title}</li>)
+            }
+        </ul>
+    }
+</article>
