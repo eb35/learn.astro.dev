@@ -1,4 +1,10 @@
 ---
+// library imports
+import { Icon } from "astro-icon/components";
+
+// component imports
+import Button from "./Button.astro";
+
 interface Features {
     title: string;
     checked: boolean;
@@ -35,19 +41,28 @@ const {
         <div>
             <span>$</span>
             <span>{amount_per_month}</span>
-            <span>/mo</span>
+            { amount_per_month > 0 && <span>/mo</span> }
         </div>
         <div>{title}</div>
         <p>{description}</p>
     </div>
-    <a href="#">{btn_text}</a>
+    <Button id={tier.toLowerCase()}>{btn_text}</Button>
     {
         features && 
         features.length && 
         <ul>
-            {
-                features.map(f => <li>{f.title}</li>)
-            }
+        {
+            features.map(f => (
+            <li>
+                { 
+                f.checked ? 
+                <Icon name="mdi:check" size={24} /> : 
+                <Icon name="mdi:multiply" size={24} />
+                }
+                {f.title}
+            </li>
+            ))
+        }
         </ul>
     }
 </article>
