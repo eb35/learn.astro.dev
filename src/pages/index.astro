@@ -1,8 +1,15 @@
 ---
+// library imports
 import type { Code, Debug } from "astro:components";
+
+// component imports
 import PricingCard from "../components/PricingCard.astro";
+
+// style imports
+import "../styles/main.css";
+
+// data imports
 import data from "../data/cardData.json";
-console.log(data);
 ---
 
 <html lang="en">
@@ -14,8 +21,18 @@ console.log(data);
 		<title>Astro</title>
 	</head>
 	<body>
-		{
-			data && data.length && data.map(d => <PricingCard {...d} />)
-		}
+		<div class="card-wrapper">
+			{
+				data && data.length && data.map(d => <PricingCard {...d} />)
+			}
+		</div>
+
+		<style>
+			.card-wrapper {
+				display: flex;
+				gap: var(--space-xl);
+				flex-wrap: wrap;
+			}
+		</style>
 	</body>
 </html>

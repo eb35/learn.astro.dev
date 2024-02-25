@@ -32,7 +32,7 @@ const {
 } = Astro.props;
 ---
 
-<article class="border-2 border-orange-500">
+<article class:list={[{"dark-shadow": most_popular}]}>
     <p>{tier}</p>
     {
         most_popular && <p>Most Popular</p>
@@ -66,3 +66,10 @@ const {
         </ul>
     }
 </article>
+
+<style>
+    article {
+        background-color: var(--color-bkg);
+        box-shadow: var(--shadow-light);
+    }
+</style>
