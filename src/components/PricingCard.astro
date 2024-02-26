@@ -33,31 +33,37 @@ const {
 ---
 
 <article class:list={[{"dark-shadow": most_popular}]}>
-    <p>{tier}</p>
+    <p class:list={["tier", tier.toLowerCase()]}>{tier}</p>
     {
-        most_popular && <p>Most Popular</p>
+        most_popular && <p class="badge">Most Popular</p>
     }
-    <div>
-        <div>
-            <span>$</span>
-            <span>{amount_per_month}</span>
-            { amount_per_month > 0 && <span>/mo</span> }
+    <div class="details">
+        <div class="amt">
+            <span class="sign">$</span>
+            <span class="num">{amount_per_month}</span>
+            { amount_per_month > 0 && <span class="mo">/mo</span> }
         </div>
-        <div>{title}</div>
-        <p>{description}</p>
+        <h3 class="title">{title}</h3>
+        <p class="desc">{description}</p>
     </div>
-    <Button id={tier.toLowerCase()}>{btn_text}</Button>
+    <Button 
+        id={tier.toLowerCase()}
+        classes="button"
+        theme={tier.toLowerCase()}
+    >
+        {btn_text}
+    </Button>
     {
         features && 
         features.length && 
-        <ul>
+        <ul class="features">
         {
             features.map(f => (
-            <li>
+            <li class="feature">
                 { 
                 f.checked ? 
-                <Icon name="mdi:check" size={24} /> : 
-                <Icon name="mdi:multiply" size={24} />
+                <Icon name="mdi:check" size={24} class="green" /> : 
+                <Icon name="mdi:multiply" size={24} class="red" />
                 }
                 {f.title}
             </li>
@@ -71,5 +77,89 @@ const {
     article {
         background-color: var(--color-bkg);
         box-shadow: var(--shadow-light);
+        border-radius: var(--rounded);
+        flex: 1 1 28%;
+        display: grid;
+        gap: var(--space--xl);
+        padding: var(--space-xl) var(--space-lg) var(--space-lg);
+        position: relative;
+    }
+    .dark-shadow {
+        box-shadow: var(--shadow-dark);
+    }
+    .tier {
+        position: absolute;
+        border-top-right-radius: var(--rounded);
+        border-top-left-radius: var(--rounded);
+        font-weight: bold;
+        padding-block: var(--space-sm);
+        text-align: center;
+        text-transform: uppercase;
+        width: 100%;
+        --local-background: var(--color-bkg);
+        --local-color: var(--color-accent-purple);
+        background-color: var(--local-background);
+        color: var(--local-color);
+    }
+    .tier.pro { 
+        --local-background: var(--color-accent-purple);
+        --local-color: var(--color-bkg);
+    }
+    .tier.enterprise {
+        --local-background: var(--color-accent-yellow);
+        --local-color: var(--color-bkg);
+    }
+    .badge {
+        background-color: var(--color-text);
+        color: var(--color-bkg);
+        font-size: var(--font-xs);
+        padding: var(--space-sm);
+        margin: var(--space-md) 0;
+        max-width: fit-content;
+        justify-self: center;
+        text-transform: uppercase;
+    }
+    .details {
+        display: grid;
+        gap: var(--space-sm);
+        place-items: center;
+        text-align: center;
+        margin: var(--space-md) 0;
+    }
+    .amt {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        max-width: fit-content;
+    }
+    .num {
+        font-size: var(--font-lg);
+        line-height: 1;
+    }
+    .mo {
+        align-self: end;
+    }
+    .title {
+        font-size: var(--font-md);
+        text-transform: uppercase;
+    }
+    .desc {
+        max-width: 70%;
+        font-weight: bold;
+    }
+    .button {
+        margin: var(--space-md) 0;
+    }
+    .features {
+        margin-inline: auto;
+    }
+    .feature {
+        display: flex;
+        align-items: center;
+    }
+    .green {
+        color: var(--color-accent-green);
+    }
+    .red {
+        color: var(--color-accent-red);
     }
 </style>

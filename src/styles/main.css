@@ -18,24 +18,27 @@
 
     /* fonts */
     --font-family: "Inter", sans-serif;
-    --font-weight: "600";
+    --font-weight: 700;
     --font-lg: 3.124rem;
     --font-md: 1rem;
     --font-sm: 0.75rem;
+    --font-xs: 0.5rem;
 
     /* spacing */
     --space-sm: 8px;
     --space-md: 12px;
     --space-lg: 20px;
     --space-xl: 32px;
+    --space-xxl: 60px;
 
     /* border radius */
+    --rounded: 6px;
 }
 
 body {
     font-family: var(--font-family);
     font-weight: var(--font-weight);
-    font-size: var(--font-md);
+    font-size: var(--font-sm);
     background-color: var(--color-bkg);
     color: var(--color-text);
 }

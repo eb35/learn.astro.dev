@@ -1,7 +1,47 @@
 ---
-const { classes, isFilled, theme, ...rest } = Astro.props;
+const { classes, theme, ...rest } = Astro.props;
 ---
 
-<button class:list={["btn", classes, {filled: isFilled}, theme]} {...rest}>
+<button class:list={["btn", classes, theme]} {...rest}>
     <slot />
 </button>
+
+<style>
+    .btn {
+        font: inherit;
+        text-transform: uppercase;
+        padding: var(--space-md);
+        border-radius: var(--rounded);
+        cursor: pointer;
+        transition: 
+            opacity 250ms ease-in-out, 
+            scale 250ms ease-in-out,
+            box-shadow 250ms ease-in-out;
+
+        --local-background: var(--color-bkg);
+        --local-color: var(--color-text);
+        --local-border: var(--color-text);
+        background-color: var(--local-background);
+        color: var(--local-color);
+        border: 2px solid var(--local-border);
+    }
+    .btn:hover {
+        opacity: 0.8;
+        scale: 1.02;
+    }
+    .btn:focus {
+        outline-color: transparent;
+    }
+    .btn:focus-visible {
+        box-shadow: 0 0 0 2px var(--color-bkg), 0 0 0 4px var(--local-border);
+    }
+    .btn.pro {
+        --local-background: var(--color-accent-purple);
+        --local-color: var(--color-bkg);
+        --local-border: var(--color-accent-purple);
+    }
+    .btn.enterprise {
+        --local-border: var(--color-accent-yellow);
+        --local-color: var(--color-accent-yellow);
+    }
+</style>

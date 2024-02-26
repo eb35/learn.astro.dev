@@ -21,17 +21,27 @@ import data from "../data/cardData.json";
 		<title>Astro</title>
 	</head>
 	<body>
-		<div class="card-wrapper">
-			{
-				data && data.length && data.map(d => <PricingCard {...d} />)
-			}
-		</div>
+		<main>
+			<div class="card-wrapper">
+				{
+					data && data.length && data.map(d => <PricingCard {...d} />)
+				}
+			</div>
+		</main>
 
 		<style>
+			main {
+				display: grid;
+				place-items: center;
+				min-height: 100vh;
+				padding: var(--space-xl);
+			}
 			.card-wrapper {
 				display: flex;
 				gap: var(--space-xl);
 				flex-wrap: wrap;
+				justify-content: center;
+				align-items: center;
 			}
 		</style>
 	</body>
