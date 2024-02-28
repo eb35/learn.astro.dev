@@ -1,15 +1,26 @@
 ---
-// library imports
-import type { Code, Debug } from "astro:components";
-
 // component imports
-import PricingCard from "../components/PricingCard.astro";
+import PricingCard from "@components/PricingCard.astro";
 
 // style imports
-import "../styles/main.css";
+import "@styles/main.css";
 
 // data imports
-import data from "../data/cardData.json";
+import data from "@data/cardData.json";
+
+// types
+export type Card = {
+	tier: string;
+    most_popular: boolean;
+    amount_per_month: number;
+    title: string;
+    description: string;
+    btn_text: string;
+    features: {
+        title: string;
+        checked: boolean;
+    }[];
+};
 ---
 
 <html lang="en">
@@ -24,7 +35,7 @@ import data from "../data/cardData.json";
 		<main>
 			<div class="card-wrapper">
 				{
-					data && data.length && data.map(d => <PricingCard {...d} />)
+					data && data.length && data.map((card: Card) => <PricingCard data={card} />)
 				}
 			</div>
 		</main>
