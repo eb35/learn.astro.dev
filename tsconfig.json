@@ -1,11 +1,19 @@
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "C:/dev/learning/learn.astro.dev",
     "paths": {
-      "@/*": [ "src/*" ],
-      "@components/*": [ "src/components/*" ],
-      "@blog/*": [ "src/pages/blog/*" ],
-    }
+      "@/*": [
+        "src/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@blog/*": [
+        "src/pages/blog/*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }

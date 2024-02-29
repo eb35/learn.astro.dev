@@ -2,10 +2,10 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 // Import a single file
-import * as myPost from '@blog/post-1.md';
+import * as myPost from '@blog/post-1.mdx';
 
 // Import multiple files with Astro.glob
-const posts = await Astro.glob('@blog/*.md');
+const posts = await Astro.glob('@blog/*.{md,mdx}');
 console.log(posts);
 ---
 
