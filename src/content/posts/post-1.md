@@ -4,6 +4,7 @@ tags: ['product', 'tutorial']
 pubDate: 2024-03-08
 isDraft: false
 canonicalUrl: http://localhost:4321/posts/post-1
+author: christina
 ---
 
 Content

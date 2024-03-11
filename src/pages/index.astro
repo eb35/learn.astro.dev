@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const team = await getCollection("team");
@@ -17,7 +17,13 @@ const posts = await getCollection("posts");
   <div>
     <h2>Posts</h2>
     <ul>
-      { posts.map((p) => <li><a href={`/posts/${p.slug}`}>{p.data.title}</a></li>) }
+      { 
+        posts.map(async (p) => {
+          const authorDetails = await getEntry("team", p.data.author.id);
+          const roleDetails = await getEntry("role", authorDetails.data.role.id);
+          return (<li><a href={`/posts/${p.slug}`}>{p.data.title}</a> by {authorDetails.data.name} ({roleDetails.data.name})</li>)
+        })
+      }
     </ul>
   </div>
 </BaseLayout>
