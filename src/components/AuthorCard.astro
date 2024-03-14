@@ -1,0 +1,9 @@
+---
+import { getEntry, type CollectionEntry, type CollectionKey } from "astro:content";
+
+const { authorId } = Astro.props;
+const author: CollectionEntry<"team"> = await getEntry("team", authorId);
+const role: CollectionEntry<"role"> = await getEntry("role", author.data.role.id);
+---
+
+<h1>{role.data.name}</h1>
