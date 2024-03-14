@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const team = await getCollection("team");
-const posts = await getCollection("posts");
+const posts = await getCollection("posts", ({ data }) => !data.isDraft);
 ---
 
 <BaseLayout title="Home">
@@ -12,27 +12,25 @@ const posts = await getCollection("posts");
   <div>
     <h2>Team</h2>
     <ul>
-      {team.map((t) => <li>{t.data.name}</li>)}
+      {
+        team.map((t) => (
+          <li>
+            <p>{t.data.name}</p>
+            <p>{t.data.role.id}</p>
+          </li>
+        ))
+      }
     </ul>
   </div>
   <div>
     <h2>Posts</h2>
     <ul>
-      { 
-        posts.map(async (p) => {
-          const authorDetails = await getEntry("team", p.data.author.id);
-          const roleDetails = await getEntry("role", authorDetails.data.role.id);
-          return (
-            <li>
-              <figure>
-                <Image src={p.data.cover} alt={p.data.coverAlt} format="avif" width="500" />
-                <figcaption>
-                  <a href={`/posts/${p.slug}`}>{p.data.title}</a> by {authorDetails.data.name} ({roleDetails.data.name})
-                </figcaption>
-              </figure>
-            </li>
-          )
-        })
+      {
+        posts.map((p) => (
+          <li>
+            <a href={p.slug}>Read Post</a>
+          </li>
+        ))
       }
     </ul>
   </div>

@@ -2,7 +2,7 @@
 title: Post 2
 tags: ["product", "tutorial"]
 pubDate: 2023-12-09
-isDraft: false
+isDraft: true
 author: christina
 cover: ./images/post-2.jpg
 coverAlt: "laptop at night"
