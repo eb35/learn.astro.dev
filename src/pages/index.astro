@@ -1,5 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content";
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const team = await getCollection("team");
@@ -21,7 +22,16 @@ const posts = await getCollection("posts");
         posts.map(async (p) => {
           const authorDetails = await getEntry("team", p.data.author.id);
           const roleDetails = await getEntry("role", authorDetails.data.role.id);
-          return (<li><a href={`/posts/${p.slug}`}>{p.data.title}</a> by {authorDetails.data.name} ({roleDetails.data.name})</li>)
+          return (
+            <li>
+              <figure>
+                <Image src={p.data.cover} alt={p.data.coverAlt} format="avif" width="500" />
+                <figcaption>
+                  <a href={`/posts/${p.slug}`}>{p.data.title}</a> by {authorDetails.data.name} ({roleDetails.data.name})
+                </figcaption>
+              </figure>
+            </li>
+          )
         })
       }
     </ul>
