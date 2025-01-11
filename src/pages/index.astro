@@ -26,11 +26,12 @@ const posts = await getCollection("posts", ({ data }) => !data.isDraft);
     <h2>Posts</h2>
     <ul>
       {
-        posts.map((p) => (
-          <li>
-            <a href={p.slug}>Read Post</a>
+        posts.map(async (p) => {
+          const authorDetails = await getEntry("team", p.data.author.id);
+          return <li>
+            <a href={p.slug}>Read Post {p.data.title} by {authorDetails.data.name}</a>
           </li>
-        ))
+        })
       }
     </ul>
   </div>
