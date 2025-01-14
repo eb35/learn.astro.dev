@@ -1,10 +1,10 @@
 ---
-title: Post 2
-tags: ["product", "tutorial"]
-pubDate: 2023-12-09
+title: Post 3
+tags: ["tutorial"]
+pubDate: 2024-11-08
 isDraft: false
-author: christina
-cover: ./images/post-2.jpg
+author: mario
+cover: ./images/post-3.jpg
 coverAlt: "laptop at night"
 ---
 

@@ -28,7 +28,7 @@ const posts = await getCollection("posts", ({ data }) => !data.isDraft);
       {
         posts.map((p) => (
           <li>
-            <a href={`/posts/${p.slug}`}>Read Post</a>
+            <a href={`/posts/${p.slug}`}>Read {p.data.title}</a>
           </li>
         ))
       }
