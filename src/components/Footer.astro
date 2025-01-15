@@ -1,13 +1,15 @@
 ---
+// helpers
 import { Icon } from "astro-icon/components";
 
+// data
 import { socialData } from "@/data/siteData";
 ---
 
 <footer>
     <div>
         <p>
-            &copy; <span id="copyright">{new Date().getFullYear()-1}</span> Katie Haus. All 
+            &copy; <span id="copyright">{new Date().getFullYear()}</span> Katie Haus. All 
             rights reserved. I’m a skilled web developer passionate about creating innovative
             and user-friendly websites.
         </p>
@@ -15,8 +17,8 @@ import { socialData } from "@/data/siteData";
             {
                 socialData.map(({href, title, icon}) => (
                     <li>
-                        <a href={href} aria-label={title} title={title}>
-                            <Icon name={icon} size={24} />
+                        <a href={href} aria-label={title} title={title} target="_blank">
+                            <Icon name={icon} size={24} aria-hidden="true" />
                         </a>
                     </li>
                 ))
