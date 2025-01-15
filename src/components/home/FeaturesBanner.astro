@@ -1,0 +1,28 @@
+---
+// helpers
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+
+// components
+import Heading from "../ui/Heading.astro";
+
+// data
+const features = await getCollection("features");
+---
+
+<section aria-label="Features Banner" class="features">
+    <div>
+        <Heading tagName="h2" size="h2">
+            I build fast, sleek, and accessible websites.
+        </Heading>
+        <ul>
+            {features.map(({data}) => (
+                <li>
+                    <Icon name={data.icon} size={64} aria-hidden="true" />
+                    <Heading tagName="h3" size="h3">{data.title}</Heading">
+                    <p>{data.description}</p>
+                </li>
+            ))}
+        </ul>
+    </div>
+</section>

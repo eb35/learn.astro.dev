@@ -1,8 +1,23 @@
 ---
+// helpers
+import Image from "astro/components/Image.astro";
+
+// components
 import Link from "@ui/Link.astro";
+import Heading from "../ui/Heading.astro";
+
+// assets
+import rob from "@/assets/avatar.jpg";
 ---
 
-<div>
-    <Link href="#" variant="secondary">Download CV</Link>
-    <Link href="#contact">Let's Connect</Link>
-</div>
+<header aria-label="Introduction to Rob" class="hero-home">
+    <Image src={rob} alt="Rob Henry" width={200} class="avatar" format="avif" />
+    <Heading tagName="h1" size="h2">
+        👋 Hi, I'm Rob
+    </Heading>
+    <p>I'm a self-taught designer and developer obsessed with quality.</p>
+    <div>
+        <Link href="#" variant="secondary">Download CV</Link>
+        <Link href="#contact">Let's Connect</Link>
+    </div>
+</header>
