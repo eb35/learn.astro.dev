@@ -1,0 +1,23 @@
+---
+// helpers
+import { Image } from "astro:assets";
+
+// components
+import Link from "@ui/Link.astro";
+import Heading from "../ui/Heading.astro";
+
+// assets
+import rob from "@/assets/avatar.jpg";
+---
+
+<header aria-label="Introduction to Rob" class="hero-not-found">
+    <Image src={rob} alt="Rob Henry" width={200} class="avatar" format="avif" />
+    <Heading tagName="h1" size="h2">
+        Are you lost?
+    </Heading>
+    <p>Oops! The page you're looking for seems to have wandered off. Please try again or visit our homepage for more information.</p>
+    <div>
+        <Link href="#" variant="secondary">Download CV</Link>
+        <Link href="/">Go Home</Link>
+    </div>
+</header>
