@@ -7,12 +7,14 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "server": "npx json-server db.json"
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
     "astro": "^4.3.2",
     "astro-icon": "^1.1.0",
+    "json-server": "^1.0.0-beta.3",
     "typescript": "^5.3.3"
   }
 }
