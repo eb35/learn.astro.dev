@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+// layout import
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+// compoents
+import PostCard from "@/components/ui/PostCard.astro";
+
+// data
+const allPosts = await getCollection("posts", ({ data }) => !data.isDraft);
+
+// assets
+import rob from "@/assets/avatar.jpg";
+import Heading from "@/components/ui/Heading.astro";
+---
+
+<BaseLayout title="Blog">
+    <section aria-label="Blog Posts">
+        <div class="blog-wrapper">
+            <div class="columns">
+                <Image src={rob} alt="Rob Henry" width={140} height={140} class="avatar" format="avif" />
+                <div class="rows">
+                    <div class="columns">
+                        <Heading tagName="h1" size="h2">My Writings</Heading>
+                        <!-- PAGE PLACEHOLDER -->
+                    </div>
+                    <p>
+                        I like to write about productivity, web development, design, and
+                        working with clients. Get a sense of what it’s like to work with me
+                        and understand my process.
+                    </p>
+                </div>
+            </div>
+            <div class="grid-wrapper">
+                {allPosts.map((p) => <PostCard post={p} />)}
+            </div>
+        </div>
+    </section>
+</BaseLayout>

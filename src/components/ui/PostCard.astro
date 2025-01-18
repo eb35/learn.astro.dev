@@ -1,0 +1,35 @@
+---
+// helpers
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+
+// components
+import Link from './Link.astro';
+import Heading from './Heading.astro';
+import FormattedDate from './FormattedDate.astro';
+
+type Props = {
+    post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+const { title, description, thumbnail, pubDate } = post.data;
+---
+
+<article class="post-card" aria-label={title}>
+    <div>
+        <Image src={thumbnail} alt={title} width={400} height={200} format="avif" />
+        <div class="content">
+            <div class="rows">
+                <div>
+                    <Heading tagName="h3" size="h4">
+                        <a href={`/blog/${post.slug}/`}>{title}</a>
+                    </Heading>
+                    <FormattedDate pubDate={pubDate} />
+                </div>
+                <p>{description}</p>
+                <Link href={`/blog/${post.slug}/`}>Read Post</Link>
+            </div>
+        </div>
+    </div>
+</article>
