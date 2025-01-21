@@ -9,7 +9,7 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true
   },
-  site: "https://robsportfolio.netlify.app",
+  site: "https://rob-astro-portfolio.netlify.app/",
   integrations: [icon(), sitemap()],
   output: "static",
   adapter: netlify()
