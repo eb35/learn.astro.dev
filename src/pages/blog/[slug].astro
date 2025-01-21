@@ -1,0 +1,58 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
+
+// layout import
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+// components
+import Heading from "@/components/ui/Heading.astro";
+import { Image } from "astro:assets";
+import FormattedDate from "@/components/ui/FormattedDate.astro";
+
+export const getStaticPaths = (async () => {
+    const allPosts = await getCollection("posts", ({ data }) => !data.isDraft);
+    return allPosts.map((p) => ({
+        params: {
+            slug: p.slug,
+        },
+        props: {
+            post: p,
+        }
+    }));
+}) satisfies GetStaticPaths;
+
+// assets
+import rob from "@/assets/avatar.jpg";
+
+const { slug } = Astro.params;
+
+type Props = {
+    post: CollectionEntry<"posts">,
+}
+const { post } = Astro.props;
+const { title, pubDate, description, thumbnail } = post.data;
+const { Content } = await post.render();
+---
+<BaseLayout title={title} description={description}>
+    <section aria-label="Post metadata" class="blog-metadata">
+        <header>
+            <FormattedDate pubDate={pubDate} />
+            <Heading tagName="h1" size="h2">{title}</Heading>
+            <p>{description}</p>
+        </header>
+        <Image src={thumbnail} alt={title} width={1000} height={400} class="hero-image" format="avif" />
+    </section>
+    <section aria-label="Post Content" class="blog-content">
+        <Content />
+    </section>
+    <section aria-label="Post author" class="author-metadata">
+        <Image src={rob} alt="Rob Henry" width={140} height={140} class="avatar" format="avif" />
+        <div>
+            <Heading tagName="h2" size="h2">👋 Hey, I'm Rob</Heading>
+            <p>
+                I like to write about productivity, web development, design, and working with clients. Get a sense of what it’s like to work with me and understand my process.
+            </p>
+        </div>
+    </section>
+</BaseLayout>
