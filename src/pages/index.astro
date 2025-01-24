@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import katie from "../assets/image.jpg";
+import ReactWrapper from "../components/ReactWrapper";
 ---
 
 <html lang="en">
@@ -13,7 +14,24 @@ import katie from "../assets/image.jpg";
 	</head>
 	<body>
 		<h1>Astro</h1>
-		<img src="/image.jpg" alt="Katie Haus" />
-		<Image src={katie} alt="Katie Haus" width={80} format="avif" />
+		<p>Public</p>
+		<Image src="/image.jpg" alt="Katie Haus" width={100} height={100}/>
+
+		<p>Local</p>
+		<Image src={katie} alt="Katie Haus" width={100} height={100} format="avif" />
+
+		<p>Remote</p>
+		<Image 
+			src="https://astro.build/_astro/astro-cap.jt5HlOg8_12GvP4.webp" 
+			alt="" 
+			format="jpg"
+			width={100} 
+			height={100} 
+		/>
+
+		<p>React</p>
+		<ReactWrapper>
+			<Image src={katie} alt="Katie Haus" width={100} height={100} format="avif" />
+		</ReactWrapper>
 	</body>
 </html>
