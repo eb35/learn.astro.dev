@@ -49,6 +49,40 @@ const { link } = Astro.props;
 
 <script>
   // delete links
+  const isReadBtns = document.querySelectorAll("[data-isread]") as NodeListOf<HTMLInputElement>;
+  
+  isReadBtns.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+      const isRead = btn.checked;
+      try {
+        if (!id) {
+          throw new Error("No id found");
+        }
+
+        const req = await fetch(`/api/${id}.json`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ isRead }),
+        });
+
+        if (!req.ok) {
+          throw new Error("Failed to update link");
+        }
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) {
+          alert(e.message);
+          return;
+        }
+        alert("There was an unknown error");
+      }
+    });
+  });
+
+  // isRead links
   const deleteBtns = document.querySelectorAll("[data-delete]") as NodeListOf<HTMLButtonElement>;
   
   deleteBtns.forEach((btn) => {
