@@ -46,3 +46,36 @@ const { link } = Astro.props;
     <Icon name="trash" size={24} />
   </Button>
 </article>
+
+<script>
+  // delete links
+  const deleteBtns = document.querySelectorAll("[data-delete]") as NodeListOf<HTMLButtonElement>;
+  
+  deleteBtns.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+      try {
+        if (!id) {
+          throw new Error("No id found");
+        }
+
+        const req = await fetch(`/api/${id}.json`, {
+          method: "DELETE",
+        });
+
+        if (!req.ok) {
+          throw new Error("Failed to delete link");
+        }
+
+        btn.closest("article")?.remove();
+      } catch (e) {
+        console.error(e);
+        if (e instanceof Error) {
+          alert(e.message);
+          return;
+        }
+        alert("There was an unknown error");
+      }
+    });
+  });
+</script>

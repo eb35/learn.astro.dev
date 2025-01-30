@@ -82,7 +82,9 @@ import sanitize from "sanitize-html";
       console.error(e);
       if ( e instanceof Error) {
         alert(e.message);
+        return;
       }
+      alert("There was an unknown error");
     }
   })
 </script>
