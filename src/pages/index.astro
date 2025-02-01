@@ -1,25 +1,5 @@
 ---
-import Button from "../components/Button.astro";
-import Counter from "../components/Counter";
-import Heading from "../components/Heading.astro";
-
-const headings = [
-  {
-    tag: "h1",
-    size: "h2",
-    text: "Heading 1"
-  },
-  {
-    tag: "h2",
-    size: "h5",
-    text: "Heading 2"
-  },
-  {
-    tag: "h4",
-    size: "h1",
-    text: "Heading 3"
-  },
-]
+import cards from "../data/cardData.json";
 ---
 
 <html lang="en">
@@ -28,45 +8,16 @@ const headings = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Components</title>
+    <title>Astro</title>
   </head>
   <body>
-    <!-- {
-      headings.map((heading) => (
-        <Heading tag={heading.tag} size={heading.size}>{heading.text}</Heading>
+    {
+      cards.map((card) => (
+        <div>
+          <h1>{card.title}</h1>
+          <p>{card.description}</p>
+        </div>
       ))
-    } -->
-    <Heading tag="h1" size="h2">Astro Components</Heading>
-    <Button classList={"hi there"} isBordered="true" background="blue" color="white">Btn Text</Button>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <Counter client:visible />
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur repudiandae minima ut debitis ipsam, quam illum. Ullam quis repellendus praesentium similique corrupti nisi veritatis laboriosam, ex numquam impedit rem sit.</p>
-  </body>
-
-  <style>
-    @import "https://unpkg.com/open-props";
-    @import "https://unpkg.com/open-props/normalize.min.css";
-    body {
-      display: grid;
-      place-content: center;
-      gap: 1.5rem;
-      padding: 1.5rem;
     }
-  </style>
+  </body>
 </html>
