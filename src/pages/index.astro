@@ -1,7 +1,24 @@
 ---
 import Button from "../components/Button.astro";
+import Heading from "../components/Heading.astro";
 
-
+const headings = [
+  {
+    tag: "h1",
+    size: "h2",
+    text: "Heading 1"
+  },
+  {
+    tag: "h2",
+    size: "h5",
+    text: "Heading 2"
+  },
+  {
+    tag: "h4",
+    size: "h1",
+    text: "Heading 3"
+  },
+]
 ---
 
 <html lang="en">
@@ -13,7 +30,12 @@ import Button from "../components/Button.astro";
     <title>Astro Components</title>
   </head>
   <body>
-    <h1>Astro Components</h1>
+    <Heading tag="h1" size="h3">Astro Components</Heading>
+    {
+      headings.map((heading) => (
+        <Heading tag={heading.tag} size={heading.size}>{heading.text}</Heading>
+      ))
+    }
     <Button classList={"hi there"} isBordered="true" background="blue" color="white">Btn Text</Button>
   </body>
 
