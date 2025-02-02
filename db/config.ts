@@ -1,11 +1,11 @@
-import { column, defineDb, defineTable } from 'astro:db';
+import { column, defineDb, defineTable, NOW } from 'astro:db';
 
 const Links = defineTable({
   columns: {
     id: column.number({ primaryKey: true }),
     title: column.text(),
     url: column.text(),
-    date: column.date(),
+    date: column.date({ default: NOW }),
     isRead: column.boolean(),
     upvoteNum: column.number(),
   }

@@ -1,5 +1,7 @@
 ---
+import { db, Links } from "astro:db";
 
+const links = await db.select().from(Links);
 ---
 
 <html lang="en">
@@ -12,5 +14,25 @@
 	</head>
 	<body>
 		<h1>Astro</h1>
+		{
+			links.map((link) => (
+				<div>
+					<a href={link.url}>{link.title}</a>
+					<time datetime={link.date.toISOString()}>{link.date.toLocaleDateString()}</time>
+					<p>IsRead: { link.isRead ? "✅" : "❌" }</p>
+					<p>Upvotes: { link.upvoteNum.toLocaleString() }</p>
+				</div>
+			))
+		}
 	</body>
+
+	<style>
+		div {
+			display: grid;
+			gap: 0.2rem;
+			margin-block: 2rem;
+			padding: 1rem;
+			border: 1px solid black;
+		}
+	</style>
 </html>
