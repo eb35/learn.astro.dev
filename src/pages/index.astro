@@ -1,38 +1,16 @@
 ---
-import { db, Links } from "astro:db";
+import LinkCard, { type LinkProps } from "@/components/LinkCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
-const links = await db.select().from(Links);
+const req = await fetch(`${Astro.url.origin}/api/getLinks.json`);
+
+const links = await req.json();
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-		{
-			links.map((link) => (
-				<div>
-					<a href={link.url}>{link.title}</a>
-					<time datetime={link.date.toISOString()}>{link.date.toLocaleDateString()}</time>
-					<p>IsRead: { link.isRead ? "✅" : "❌" }</p>
-					<p>Upvotes: { link.upvoteNum.toLocaleString() }</p>
-				</div>
-			))
-		}
-	</body>
-
-	<style>
-		div {
-			display: grid;
-			gap: 0.2rem;
-			margin-block: 2rem;
-			padding: 1rem;
-			border: 1px solid black;
-		}
-	</style>
-</html>
+<BaseLayout>
+  <div
+    class="grid gap-6 grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))] items-start"
+  >
+    {links.map((l: LinkProps) => <LinkCard link={l} />)}
+  </div>
+</BaseLayout>
