@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { db, Links } from "astro:db";
 import sanitize from "sanitize-html";
 
 export const POST: APIRoute = async ({ request }) => {
@@ -15,22 +16,13 @@ export const POST: APIRoute = async ({ request }) => {
       throw new Error("Please provide all required fields.");
     }
 
-    const req = await fetch("http://localhost:3000/links", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: sanitize(title),
-        description: sanitize(description),
-        url: sanitize(url),
-        isRead,
-      }),
+    const req = await db.insert(Links).values({
+      title: sanitize(title),
+      description: sanitize(description),
+      url: sanitize(url),
+      isRead,
+      upvoteNum: 0,
     });
-
-    if (!req.ok) {
-      throw new Error("There was a problem with the server req.");
-    }
 
     return new Response(
       JSON.stringify({

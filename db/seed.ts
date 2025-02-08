@@ -4,7 +4,7 @@ import { db, Links } from 'astro:db';
 export default async function seed() {
 	await db.insert(Links).values([
 		{
-			title: "Title",
+			title: "Title2",
 			url: "google.com",
 			isRead: true,
 			upvoteNum: 3,

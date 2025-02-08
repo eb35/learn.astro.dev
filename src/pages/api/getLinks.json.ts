@@ -1,16 +1,11 @@
 import type { APIRoute } from "astro";
+import { db, Links } from "astro:db";
 
 export const GET: APIRoute = async () => {
   try {
-    const req = await fetch("http://localhost:3000/links");
+    const req = await db.select().from(Links)
 
-    if (!req.ok) {
-      throw new Error("Get req was not okay");
-    }
-
-    const res = await req.json();
-
-    return new Response(JSON.stringify(res), {
+    return new Response(JSON.stringify(req), {
       status: 200,
     });
   } catch (e) {

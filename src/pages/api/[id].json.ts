@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { db, eq, Links } from "astro:db";
 
 export const DELETE: APIRoute = async ({ params }) => {
   const id = params.id;
@@ -8,13 +9,7 @@ export const DELETE: APIRoute = async ({ params }) => {
       throw new Error("There was no ID provided");
     }
 
-    const req = await fetch(`http://localhost:3000/links/${id}`, {
-      method: "DELETE",
-    });
-
-    if (!req.ok) {
-      throw new Error("There was a problem with the delete req server-side");
-    }
+    const req = await db.delete(Links).where(eq(Links.id, id));
 
     return new Response(null, { status: 204 });
   } catch (e) {
@@ -51,19 +46,9 @@ export const PATCH: APIRoute = async ({ params, request }) => {
       throw new Error("There was no ID provided");
     }
 
-    const req = await fetch(`http://localhost:3000/links/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ isRead }),
-    });
+    const req = await db.update(Links).set({ isRead }).where(eq(Links.id, id));
 
-    if (!req.ok) {
-      throw new Error("There was a problem with the patch req server-side");
-    }
-
-    return new Response(null, { status: 204 });
+    return new Response(null, { status: 200 });
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {
