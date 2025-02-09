@@ -1,5 +1,5 @@
 ---
-console.log("homepage");
+const { userMessage } = Astro.locals;
 ---
 
 <html lang="en">
@@ -12,5 +12,7 @@ console.log("homepage");
 	</head>
 	<body>
 		<h1>Astro</h1>
+		<p>{userMessage()}</p>
+		<p>This is some PRIVATE INFO</p>
 	</body>
 </html>
