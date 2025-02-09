@@ -1,5 +1,6 @@
 ---
-const { userMessage } = Astro.locals;
+import { db, Logs } from "astro:db"
+const logs = await db.select().from(Logs);
 ---
 
 <html lang="en">
@@ -12,7 +13,18 @@ const { userMessage } = Astro.locals;
 	</head>
 	<body>
 		<h1>Astro</h1>
-		<p>{userMessage()}</p>
 		<p>This is some PRIVATE INFO</p>
+		<section>
+			<h2>Logs</h2>
+			<ul>
+				{
+					logs.map((log) => (
+						<li>
+							{log.url} - {log.date_accessed.toLocaleDateString()}
+						</li>
+					))
+				}
+			</ul>
+		</section>
 	</body>
 </html>
