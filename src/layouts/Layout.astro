@@ -1,9 +1,13 @@
 ---
+import { projectAuth } from '../firebase/config';
+
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
+
+const isLoggedIn = projectAuth.currentUser;
 ---
 
 <!doctype html>
@@ -20,6 +24,23 @@ const { title } = Astro.props;
     <main>
       <slot />
     </main>
+    { isLoggedIn &&
+        <form action="/api/logout.json" data-authForm>
+          <button>Log out</button>
+        </form>
+        
+    }
+
+    <script>
+      import { formSubmit } from "../lib/formSubmit";
+
+      const forms = document.querySelectorAll("[data-authForm]") as NodeListOf<HTMLFormElement>;
+      
+        forms.forEach((form) => {
+          formSubmit(form);
+        })
+    </script>
+
     <style is:global>
       @import "https://unpkg.com/open-props";
       @import "https://unpkg.com/open-props/normalize.min.css";

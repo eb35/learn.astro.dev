@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Create your account">
+  <h1>Create Account</h1>
+  <form action="/api/create.json" data-authForm>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required />
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required />
+    <button>Create Account</button>
+  </form>
+  <p>Have an account? <a href="/login">Login instead</a></p>
+</Layout>
