@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/db": "^0.14.6",
     "@astrojs/vercel": "^8.0.4",
+    "@lucia-auth/adapter-drizzle": "^1.1.0",
     "astro": "^5.2.5",
-    "firebase": "^11.3.0",
+    "lucia": "^3.2.2",
+    "oslo": "^1.2.1",
     "typescript": "^5.3.3"
   }
 }
