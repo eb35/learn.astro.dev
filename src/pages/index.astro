@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+const { user } = Astro.locals;
 ---
 
 <Layout title="Welcome to Astro.">
-  <h1>Successfully logged in!</h1>
+  <h1>{user && user.username}, you are successfully logged in!</h1>
   <p>You are now seeing protected content!</p>
 </Layout>
