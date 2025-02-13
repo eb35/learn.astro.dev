@@ -46,57 +46,59 @@ import Heading from "./ui/Heading.astro";
 </section>
 
 <script>
-  const contactForm = document.querySelector(
-    "#contact-form"
-  ) as HTMLFormElement;
-  const messageParagraph = document.querySelector(
-    ".message"
-  ) as HTMLParagraphElement;
+  document.addEventListener("astro:page-load", () => {
+    const contactForm = document.querySelector(
+      "#contact-form"
+    ) as HTMLFormElement;
+    const messageParagraph = document.querySelector(
+      ".message"
+    ) as HTMLParagraphElement;
 
-  const updateMessage = (message: string, type: "error" | "success") => {
-    messageParagraph.classList.add(type);
-    messageParagraph.textContent = message;
-    setTimeout(() => {
-      messageParagraph.textContent = "";
-      messageParagraph.classList.remove(type);
-    }, 3000);
-  };
+    const updateMessage = (message: string, type: "error" | "success") => {
+      messageParagraph.classList.add(type);
+      messageParagraph.textContent = message;
+      setTimeout(() => {
+        messageParagraph.textContent = "";
+        messageParagraph.classList.remove(type);
+      }, 3000);
+    };
 
-  contactForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(contactForm);
-    const { name, email } = Object.fromEntries(formData);
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      const { name, email } = Object.fromEntries(formData);
 
-    // Note: more validation!
-    if (!name || typeof name !== "string" || name.length < 2) {
-      return updateMessage("Please enter a valid name", "error");
-    }
-    if (!email || typeof email !== "string" || !email.includes("@")) {
-      return updateMessage("Please enter a valid email", "error");
-    }
-
-    try {
-      const res = await fetch("http://localhost:3000/contacts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email }),
-      });
-      if (!res.ok) {
-        throw new Error("Response was not OK");
+      // Note: more validation!
+      if (!name || typeof name !== "string" || name.length < 2) {
+        return updateMessage("Please enter a valid name", "error");
       }
-      contactForm.reset();
-      return updateMessage("Thanks for reaching out!", "success");
-    } catch (e) {
-      if (e instanceof Error) {
-        console.error(e.message);
-        return updateMessage(e.message, "error");
+      if (!email || typeof email !== "string" || !email.includes("@")) {
+        return updateMessage("Please enter a valid email", "error");
       }
-      return updateMessage(
-        "Something went wrong. Please try again later.",
-        "error"
-      );
-    }
-  });
+
+      try {
+        const res = await fetch("http://localhost:3000/contacts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email }),
+        });
+        if (!res.ok) {
+          throw new Error("Response was not OK");
+        }
+        contactForm.reset();
+        return updateMessage("Thanks for reaching out!", "success");
+      } catch (e) {
+        if (e instanceof Error) {
+          console.error(e.message);
+          return updateMessage(e.message, "error");
+        }
+        return updateMessage(
+          "Something went wrong. Please try again later.",
+          "error"
+        );
+      }
+    });
+  })
 </script>

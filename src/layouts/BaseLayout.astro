@@ -13,7 +13,7 @@ import { fade, slide } from "astro:transitions";
   <BaseHead {...Astro.props} />
   <body>
     <Nav />
-    <main transition:animate={slide({ duration: "4s" })}>
+    <main>
       <slot />
     </main>
     <Footer />

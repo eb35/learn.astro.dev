@@ -33,28 +33,43 @@ import { Icon } from "astro-icon/components";
 </footer>
 
 <script>
-  const copyrightSpan = document.querySelector("#copyright") as HTMLSpanElement;
-  copyrightSpan.textContent = new Date().getFullYear().toString();
+  document.addEventListener("astro:page-load", () => {
+    const copyrightSpan = document.querySelector("#copyright") as HTMLSpanElement;
+    copyrightSpan.textContent = new Date().getFullYear().toString();
 
-  // theming
-  const themeBtn = document.querySelector("#theme") as HTMLButtonElement;
+    // theming
+    const themeBtn = document.querySelector("#theme") as HTMLButtonElement;
 
-  // fetch theme
-  const existingTheme = localStorage.getItem("theme");
+    // fetch theme
+    const existingTheme = localStorage.getItem("theme");
 
-  const setTheme = (theme: string) => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  };
-
-  window.addEventListener("DOMContentLoaded", () => {
+    const setTheme = (theme: string) => {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    };
+    
     if (existingTheme) {
       setTheme(existingTheme);
     }
-  });
 
-  themeBtn.addEventListener("click", () => {
-    const newTheme = existingTheme === "light" ? "dark" : "light";
-    setTheme(newTheme);
+    themeBtn.addEventListener("click", () => {
+      const newTheme = localStorage.getItem("theme") === "light" ? "dark" : "light";
+      setTheme(newTheme);
+    });
+  })
+</script>
+
+<script>
+  document.addEventListener("astro:after-swap", () => {
+    const existingTheme = localStorage.getItem("theme");
+
+    const setTheme = (theme: string) => {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    };
+    
+    if (existingTheme) {
+      setTheme(existingTheme);
+    }
   });
 </script>
