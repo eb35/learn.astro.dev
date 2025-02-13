@@ -7,11 +7,21 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "server": "json-server db.json"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "astro": "^5.0.5",
+    "@astrojs/netlify": "^6.1.0",
+    "@astrojs/react": "^4.2.0",
+    "@astrojs/sitemap": "^3.2.1",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "astro": "^5.2.6",
+    "astro-icon": "^1.1.5",
+    "json-server": "^1.0.0-beta.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "typescript": "^5.3.3"
   }
 }
