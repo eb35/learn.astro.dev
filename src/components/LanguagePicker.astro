@@ -1,0 +1,23 @@
+---
+import { Languages } from "@/i18n/defaultLangOptions";
+
+const currentLocale = Astro.currentLocale;
+---
+
+<select name="lang" id="lang">
+    {
+        Languages.map((lang) => (
+            <option value={lang.value} selected={lang.value === currentLocale}>{lang.name}</option>
+        ))
+    }
+</select>
+
+<script>
+    const select = document.querySelector("#lang") as HTMLSelectElement
+
+    select.addEventListener("change", () => {
+        const newLocale = select.value;
+        const [ _, locale, ...path] = window.location.pathname.split("/");
+        window.location.assign(`/${newLocale}/${path.join("/")}`);
+    })
+</script>
