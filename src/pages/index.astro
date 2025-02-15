@@ -1,0 +1,9 @@
+---
+import { defaultLanguage } from "@/i18n/defaultLangOptions";
+
+export const prerender = false;
+
+const locale = Astro.preferredLocale ?? defaultLanguage;
+
+return Astro.redirect(`/${locale}/`, 307);
+---
