@@ -6,7 +6,8 @@ const teamData = await getCollection("team");
 const posts = await getCollection("posts");
 const cats = await getCollection("cats");
 const toml = await getCollection("toml");
-console.log("🚀 ~ toml:", toml)
+const todos = await getCollection("todos");
+console.log("🚀 ~ todo:", todos)
 
 ---
 
@@ -26,6 +27,15 @@ console.log("🚀 ~ toml:", toml)
       posts.map((post) => (
         <li>
           {post.data.title}
+        </li>
+      ))
+    }
+  </ul>
+  <ul>
+    {
+      todos.map(t => (
+        <li>
+          {t.data.title}
         </li>
       ))
     }
