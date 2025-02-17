@@ -3,6 +3,9 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layout/BaseLayout.astro";
 
 const teamData = await getCollection("team");
+const posts = await getCollection("posts");
+console.log("🚀 ~ posts:", posts)
+
 ---
 
 <BaseLayout>
@@ -12,6 +15,15 @@ const teamData = await getCollection("team");
       teamData.map((member) => (
         <li>
           {member.data.name}
+        </li>
+      ))
+    }
+  </ul>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          {post.data.title}
         </li>
       ))
     }
