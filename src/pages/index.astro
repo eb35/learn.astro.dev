@@ -1,16 +1,19 @@
 ---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layout/BaseLayout.astro";
 
+const teamData = await getCollection("team");
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <h1>Homepage</h1>
+  <ul>
+    {
+      teamData.map((member) => (
+        <li>
+          {member.data.name}
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
