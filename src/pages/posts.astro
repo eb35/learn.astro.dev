@@ -1,0 +1,22 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import BaseLayout from "../layout/BaseLayout.astro";
+
+const posts = await getCollection("posts", ({ data } ) => data.canonicalURL);
+
+const author = await getEntry("team", posts[0].data.author.id);
+---
+
+<BaseLayout>
+  <h1>Posts</h1>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          {post.data.canonicalURL} by {author?.data.name}
+          <img src={post.data.cover.src} alt={post.data.coverAlt} />
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

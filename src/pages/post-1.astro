@@ -1,0 +1,13 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import BaseLayout from "../layout/BaseLayout.astro";
+
+const post = await getEntry("posts", "src/data/posts/post-1");
+
+---
+
+<BaseLayout>
+  <h1>Post 1</h1>
+  <p>{post?.data.title}</p>
+  <p>{post?.body}</p>
+</BaseLayout>
