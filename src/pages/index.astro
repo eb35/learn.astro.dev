@@ -2,8 +2,9 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layout/BaseLayout.astro";
 
-const teamData = await getCollection("team");
+const teamData = await getCollection("team", ({ data }) => data.department === "Software Development");
 const posts = await getCollection("posts");
+console.log("🚀 ~ posts:", posts)
 const cats = await getCollection("cats");
 const toml = await getCollection("toml");
 const todos = await getCollection("todos");

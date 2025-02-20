@@ -23,7 +23,7 @@ export const collections = {
     posts: defineCollection({
         loader: glob({
             pattern: "src/data/posts/**/*.md",
-            //generateId: ({ entry, data }) => data.title as unknown as string,
+            generateId: ({ entry, data }) => entry.replace("src/data/posts/", "").replace(".md", ""),
         }),
         schema: (({ image }) => z.object({
             title: z.string().max(32, { message: "Title too long" }),

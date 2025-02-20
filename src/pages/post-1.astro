@@ -2,12 +2,18 @@
 import { getCollection, getEntry } from "astro:content";
 import BaseLayout from "../layout/BaseLayout.astro";
 
-const post = await getEntry("posts", "src/data/posts/post-1");
+const post = await getEntry("posts", "post-1");
 
+if (!post) {
+  return new Response(null, {
+    status: 404
+  })
+}
 ---
 
 <BaseLayout>
-  <h1>Post 1</h1>
+  <h1>{post?.data.title}</h1>
+  <img src={post.data.cover.src} alt={post.data.coverAlt} />
   <p>{post?.data.title}</p>
   <p>{post?.body}</p>
 </BaseLayout>
