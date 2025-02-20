@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import BaseLayout from "../layout/BaseLayout.astro";
 
 const post = await getEntry("posts", "post-1");
@@ -9,11 +9,21 @@ if (!post) {
     status: 404
   })
 }
+
+const { Content, headings } = await render(post)
 ---
 
 <BaseLayout>
   <h1>{post?.data.title}</h1>
   <img src={post.data.cover.src} alt={post.data.coverAlt} />
-  <p>{post?.data.title}</p>
-  <p>{post?.body}</p>
+  <Content />
+  <ul>
+    {
+      headings.map((h) => (
+        <li>
+          <a href={`#${h.slug}`}>{h.text}</a>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>
