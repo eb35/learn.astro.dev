@@ -13,12 +13,17 @@ export const collections = {
                 id: todo.id.toString()
             }))
         },
-        schema: z.object({
-            userId: z.number(),
-            id: z.string(),
-            title: z.string(),
-            completed: z.boolean(),
-        })
+        schema: z
+            .object({
+                userId: z.number(),
+                id: z.string(),
+                title: z.string(),
+                completed: z.boolean(),
+            })
+            .transform((data) => ({
+                taskName: data.title,
+                isComplete: data.completed,
+            }))
     }),
     posts: defineCollection({
         loader: glob({
