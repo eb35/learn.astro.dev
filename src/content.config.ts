@@ -32,4 +32,20 @@ export const collections = {
       ]),
     }),
   }),
+  pokemons: defineCollection({
+    loader: async () => {
+      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10&offset=0");
+      const data = await response.json();
+      return data.results.map((pokemon: any) => ({
+        id: pokemon.name,
+        ...pokemon
+      }))
+    },
+    schema: z.object({
+      id: z.string(),
+      name: z.string(),
+      url: z.string(),
+    })
+  }),
+
 };
