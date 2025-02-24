@@ -1,17 +1,4 @@
 import { defineConfig } from 'astro/config';
 
-import node from '@astrojs/node';
-
 // https://astro.build/config
-export default defineConfig({
-  adapter: node({
-    mode: 'standalone'
-  }),
-  output: "static",
-  // redirects: {
-  //   "/about": {
-  //     status: 301,
-  //     destination: "/",
-  //   },
-  // }
-});
+export default defineConfig({});
