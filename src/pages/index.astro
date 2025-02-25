@@ -4,23 +4,23 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import "@/styles/globals.css";
 import { getEntries, getEntry } from "astro:content";
 
-//const testimonialSection = await getEntry("keystatic", "testimonialSection");
+const testimonialSection = await getEntry("keystatic", "testimonialSection");
 
-// const testimonials = await getEntries(testimonialSection.data.testimonials);
+const testimonials = await getEntries(testimonialSection.data.testimonials);
 
-// const testimonialData = {
-//   heading: testimonialSection.data.heading,
-//   testimonials: testimonials.map(({ data }) => {
-//     return {
-//       ...data,
-//       image: data.image.src,
-//     };
-//   }),
-// };
+const testimonialData = {
+  heading: testimonialSection.data.heading,
+  testimonials: testimonials.map(({ data }) => {
+    return {
+      ...data,
+      image: data.image.src,
+    };
+  }),
+};
 
-// export type TestimonialSectionType = typeof testimonialData;
+export type TestimonialSectionType = typeof testimonialData;
 ---
 
 <BaseLayout title="Home Page">
-  <!-- <TestimonialCard data={testimonialData} /> -->
+  <TestimonialCard data={testimonialData} />
 </BaseLayout>
