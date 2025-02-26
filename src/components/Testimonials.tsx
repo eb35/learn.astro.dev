@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import type { TestimonialSectionType } from "@/pages/keystatic-testimonials.astro";
+import type { TestimonialSectionType } from "@/pages/index.astro";
 import { Star } from "lucide-react";
 
 const LocalCard = ({
@@ -57,8 +57,8 @@ export default function Component({ data }: { data: TestimonialSectionType }) {
       </Tag>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 transition-opacity duration-300 ease-in-out opacity-100">
         {data.testimonials
-          .sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0))
-          .map((testimonial, index) => (
+          .sort((a: TestimonialSectionType["testimonials"][0], b: TestimonialSectionType["testimonials"][0]) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0))
+          .map((testimonial: TestimonialSectionType["testimonials"][0], index: number) => (
             <LocalCard
               key={testimonial.name}
               testimonial={testimonial}
