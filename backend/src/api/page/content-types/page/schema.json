@@ -4,7 +4,8 @@
   "info": {
     "singularName": "page",
     "pluralName": "pages",
-    "displayName": "page"
+    "displayName": "page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,6 +22,17 @@
     "slug": {
       "type": "uid",
       "targetField": "title"
+    },
+    "primary_heading": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.heading"
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "section.testimonial-section"
+      ]
     }
   }
 }

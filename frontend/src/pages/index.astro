@@ -2,23 +2,29 @@
 import TestimonialCard from "@/components/Testimonials";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import "@/styles/globals.css";
-import { getEntries, getEntry } from "astro:content";
+//import { getEntries, getEntry } from "astro:content";
 
-const testimonialSection = await getEntry("keystatic", "testimonialSection");
+const data = await fetch("http://localhost:1338/api/pages?populate[0]=primary_heading&populate[1]=blocks&populate[2]=blocks.heading&populate[3]=blocks.testimonials&populate[4]=blocks.testimonials.image");
+console.log("🚀 ~ data:", data)
 
-const testimonials = await getEntries(testimonialSection.data.testimonials);
+// const testimonialData = await data.json();
+// console.log("🚀 ~ testimonialData:", testimonialData)
 
-const testimonialData = {
-  heading: testimonialSection.data.heading,
-  testimonials: testimonials.map(({ data }) => {
-    return {
-      ...data,
-      image: data.image.src,
-    };
-  }),
-};
+// const testimonialSection = await getEntry("keystatic", "testimonialSection");
 
-export type TestimonialSectionType = typeof testimonialData;
+// const testimonials = await getEntries(testimonialSection.data.testimonials);
+
+// const testimonialData = {
+//   heading: testimonialSection.data.heading,
+//   testimonials: testimonials.map(({ data }) => {
+//     return {
+//       ...data,
+//       image: data.image.src,
+//     };
+//   }),
+// };
+
+// export type TestimonialSectionType = typeof testimonialData;
 ---
 
 <BaseLayout title="Homepage">
