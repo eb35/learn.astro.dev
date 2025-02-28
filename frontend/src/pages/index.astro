@@ -2,13 +2,39 @@
 import TestimonialCard from "@/components/Testimonials";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import "@/styles/globals.css";
+import type { APIResponseCollection } from "@/types/types";
 //import { getEntries, getEntry } from "astro:content";
 
-const data = await fetch("http://localhost:1338/api/pages?populate[0]=primary_heading&populate[1]=blocks&populate[2]=blocks.heading&populate[3]=blocks.testimonials&populate[4]=blocks.testimonials.image");
-console.log("🚀 ~ data:", data)
+const BASE_URL = "http://127.0.0.1:1338"
 
-// const testimonialData = await data.json();
-// console.log("🚀 ~ testimonialData:", testimonialData)
+async function getData() {
+  const response = await fetch(`${BASE_URL}/api/pages?populate[0]=primary_heading&populate[1]=blocks&populate[2]=blocks.heading&populate[3]=blocks.testimonials&populate[4]=blocks.testimonials.image`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return await response.json();
+}
+
+const { data } = (await getData() as APIResponseCollection<"api::page.page">);
+//console.log("🚀 ~ data:", data)
+
+const blockData = data[0].blocks;
+console.log("🚀 ~ blockData:", blockData);
+const examplet = blockData[0].testimonials[0];
+console.log("🚀 ~ examplet:", examplet)
+
+const strapiData = {
+  heading: blockData[0].heading,
+  testimonials: blockData[0].testimonials.map((t: any) => {
+    return {
+      ...t,
+      image: `${BASE_URL}${t.image.formats.thumbnail.url}`,
+    }
+  })
+}
+console.log("🚀 ~ strapiData:", strapiData)
+
+
 
 // const testimonialSection = await getEntry("keystatic", "testimonialSection");
 
@@ -28,5 +54,5 @@ console.log("🚀 ~ data:", data)
 ---
 
 <BaseLayout title="Homepage">
-  <TestimonialCard data={testimonialData} />
+  <TestimonialCard data={strapiData} />
 </BaseLayout>

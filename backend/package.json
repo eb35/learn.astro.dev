@@ -5,6 +5,7 @@
   "description": "A Strapi application",
   "scripts": {
     "build": "strapi build",
+    "copytypes": "strapi ts:generate-types -o ../frontend/src/types/strapi",
     "deploy": "strapi deploy",
     "develop": "strapi develop",
     "start": "strapi start",
