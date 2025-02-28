@@ -1,7 +1,16 @@
 ---
+import BookCard from "@/components/BookCard.astro";
 import BaseLayout from "@/layout/BaseLayout.astro";
+import type { TBook } from "@/types/Books";
+import { Book } from "astro:db";
+import { db } from "astro:db";
+
+const books = await db.select().from(Book);
+console.log("🚀 ~ books:", books)
+
 ---
 
 <BaseLayout>
   <h1>Bookends Library</h1>
+  <BookCard book={books[0] as TBook} />
 </BaseLayout>
