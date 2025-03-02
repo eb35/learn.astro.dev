@@ -1,14 +1,23 @@
 import type { OpenLibraryDocsItem } from "@/types/OpenLibrary";
 import type { APIRoute } from "astro";
+import { error } from "node_modules/astro/dist/core/logger/core";
 
 export const GET: APIRoute = async ({ request }) => {
     // get query params
+    const query = new URL(request.url).searchParams.get("search");
 
     // return early if no params
+    if (!query) {
+        return new Response(JSON.stringify({
+            data: [],
+            error: null
+        }))
+    }
 
     // query the api
+    console.log("url is", `https://openlibrary.org/search.json?q=${query}&limit=6`)
     try {
-        const res = await fetch("https://openlibrary.org/search.json?q=the+lord+of+the+rings&limit=6");
+        const res = await fetch(`https://openlibrary.org/search.json?q=${query}&limit=6`);
 
         if (!res.ok) {
             throw new Error("Failed to fetch data");
@@ -21,7 +30,7 @@ export const GET: APIRoute = async ({ request }) => {
         const books = data.docs.map((book: OpenLibraryDocsItem) => ({
             title: book.title,
             author: book.author_name,
-            cover: `https://covers.openlibrary.org/a/olid/${book.cover_i}.jpg`,
+            cover: `https://covers.openlibrary.org/b/id/${book.cover_i}.jpg`,
             id: book.key.replaceAll("/works/", ""),
         }))
 
