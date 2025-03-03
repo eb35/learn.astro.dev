@@ -113,4 +113,36 @@ import type { TBook } from "@/types/Books";
       alert(error instanceof Error ? error.message : "Unknown error");
     }
   });
+
+  newBookList.addEventListener("click", async (e) => {
+    if (!(e.target as HTMLElement).classList.contains("add-book-checkbox")) return;
+
+    const bookData = JSON.parse(decodeURIComponent((e.target as HTMLButtonElement).dataset.book as string));
+    
+    try {
+      const res = await fetch(`/api/books.json`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Unable to add book");
+      }
+
+      const { data, error } = await res.json();
+      if (error) {
+        throw new Error(error);
+      }
+
+      // redirect to book page
+      window.location.href = `/book/${bookData.id}`;
+    } catch (error) {
+      console.error(error);
+      alert(error instanceof Error ? error.message : "Unknown error");
+    }
+    
+  });
 </script>
