@@ -5,12 +5,61 @@ import type { TBook } from "@/types/Books";
 import { Book } from "astro:db";
 import { db } from "astro:db";
 
-const books = await db.select().from(Book);
-console.log("🚀 ~ books:", books)
+const books = (await db.select().from(Book)) as TBook[];
+
+const booksByStatus = books.reduce(
+  (acc, book: TBook) => {
+    acc[book.status].push(book);
+    return acc;
+  }, {
+    reading: [],
+    to_read: [],
+    read: []
+  } as Record<TBook["status"], TBook[]>
+);
+console.log("🚀 ~ booksByStatus:", booksByStatus)
 
 ---
 
 <BaseLayout>
   <h1>Bookends Library</h1>
-  <BookCard book={books[0] as TBook} />
+  
+  {
+    booksByStatus.reading.length > 0 && (
+      <section class="book-list-section-wrapper" aria-label="Books I'm currently reading">
+        <h2>Currently Reading</h2>
+        <ul class="book-card-list">
+          {booksByStatus.reading.map((book) => (
+            <BookCard book={book} />
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    booksByStatus.to_read.length > 0 && (
+      <section class="book-list-section-wrapper" aria-label="Books I want to read">
+        <h2>Want to Read</h2>
+        <ul class="book-card-list">
+          {booksByStatus.to_read.map((book) => (
+            <BookCard book={book} />
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    booksByStatus.read.length > 0 && (
+      <section class="book-list-section-wrapper" aria-label="Books I've read">
+        <h2>Already Read</h2>
+        <ul class="book-card-list">
+          {booksByStatus.read.map((book) => (
+            <BookCard book={book} />
+          ))}
+        </ul>
+      </section>
+    )
+  }
 </BaseLayout>
