@@ -1,7 +1,6 @@
 import type { OpenLibraryDocsItem } from "@/types/OpenLibrary";
 import type { APIRoute } from "astro";
 import { Book, db } from "astro:db";
-import { error } from "node_modules/astro/dist/core/logger/core";
 
 export const GET: APIRoute = async ({ request }) => {
     // get query params
@@ -74,6 +73,6 @@ export const POST: APIRoute = async ({ request }) => {
         return new Response(JSON.stringify({
             data: null,
             error: error instanceof Error ? error.message : error,
-        }))
+        }));
     }
 }
