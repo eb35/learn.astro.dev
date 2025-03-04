@@ -33,3 +33,29 @@ const { author, cover, id: bookId, status, title } = books[0] as TBook;
         <button class="remove-book-button btn warning" data-id={bookId}>Remove from Library</button>
     </div>
 </BaseLayout>
+
+<script>
+    const removeBookButton = document.querySelector(".remove-book-button") as HTMLButtonElement | null;
+
+    removeBookButton?.addEventListener("click", async (e) => {
+        try {
+            const res = await fetch(`/api/books/${removeBookButton.dataset.id}.json`, {
+                method: "DELETE",
+            });
+
+            if (!res.ok) {
+                throw new Error("Unable to remove book");
+            }
+
+            const { data, error } = await res.json();
+            if (error) {
+                throw new Error(error);
+            }
+
+            window.location.href = "/";
+        } catch (error) {
+            console.error(error);
+            alert(error instanceof Error ? error.message : "Unknown error");
+        }
+    })
+</script>

@@ -30,3 +30,29 @@ export const PATCH: APIRoute = async ({ request, params }) => {
         }));
     }
 };
+
+export const DELETE: APIRoute = async ({ params }) => {
+    const { id } = params;
+
+    try {
+        if (!id) {
+            throw new Error("No book selected");
+        }
+        
+        const dbData = await db
+            .delete(Book)
+            .where(eq(Book.id, id));
+
+        return new Response(JSON.stringify({
+            data: null,
+            error: null,
+        }));
+
+    } catch (error) {   
+        console.error(error);
+        return new Response(JSON.stringify({
+            data: null,
+            error: error instanceof Error ? error.message : error,
+        }));
+    }
+};
