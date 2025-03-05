@@ -1,15 +1,18 @@
 ---
 import { Image } from "astro:assets";
+
+const { product } = Astro.props;
+const { id, name, price, images } = product.data;
 ---
 
 <li class="product-card grid-xs">
   <Image
-    src="https://placehold.co/320x320"
-    alt={"_TODO_"}
+    src={images[0]}
+    alt={name}
     height={320}
     width={320}
   />
-  <h2>{"_NAME_"}</h2>
+  <h2>{name}</h2>
   <p>{"_PRICE_"}</p>
-  <a href={`/product/${"_PRODUCT_ID_"}`} class="btn">View More</a>
+  <a href={`/product/${id}`} class="btn">View More</a>
 </li>
