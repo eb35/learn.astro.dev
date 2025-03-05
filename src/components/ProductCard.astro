@@ -1,8 +1,10 @@
 ---
+import { getProductPrice } from "@/lib/cart";
 import { Image } from "astro:assets";
 
 const { product } = Astro.props;
-const { id, name, price, images } = product.data;
+const { id, name, images } = product.data;
+const price = await getProductPrice(product)
 ---
 
 <li class="product-card grid-xs">
@@ -13,6 +15,6 @@ const { id, name, price, images } = product.data;
     width={320}
   />
   <h2>{name}</h2>
-  <p>{"_PRICE_"}</p>
+  <p>{price}</p>
   <a href={`/product/${id}`} class="btn">View More</a>
 </li>
