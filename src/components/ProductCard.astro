@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 
 const { product } = Astro.props;
 const { id, name, images } = product.data;
-const price = await getProductPrice(product)
+const price = await getProductPrice(product);
 ---
 
 <li class="product-card grid-xs">
