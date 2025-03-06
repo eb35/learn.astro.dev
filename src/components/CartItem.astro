@@ -1,5 +1,5 @@
 ---
-import type { FinalCartItem } from "@/lib/cart";
+import { getProductPrice, type FinalCartItem } from "@/lib/cart";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 
@@ -8,35 +8,40 @@ type Props = {
 };
 
 const { cartItem } = Astro.props;
+
+const { product, quantity } = cartItem;
+const { name, description, images } = product.data;
+const price = await getProductPrice(product);
+
 ---
 
 <li class="cart-item">
   <Image
-    src="https://placehold.co/150x150"
-    alt={"_TODO_"}
+    src={images[0]}
+    alt={name}
     height={150}
     width={150}
   />
   <div class="grid-xs">
-    <p>{"_PRICE_"}</p>
-    <h2>{"_NAME_"}</h2>
+    <p>{price}</p>
+    <h2>{name}</h2>
     <div class="cart-button-wrapper">
       <button
         class="btn cart"
         data-cart
         data-action="decrement"
-        data-productid={"_PRODUCT_ID_"}
-        aria-label={`Remove one ${"_NAME_"} to cart`}
+        data-productid={product.id}
+        aria-label={`Remove one ${name} from cart`}
       >
         <Icon name="minus" width="16" height="16" />
       </button>
-      <p data-quantity data-productId={"_PRODUCT_ID_"}>{"_QUANTITY_"}</p>
+      <p data-quantity data-productId={product.id}>{quantity}</p>
       <button
         class="btn cart"
         data-cart
         data-action="increment"
-        data-productid={"_PRODUCT_ID_"}
-        aria-label={`Add one ${"_NAME_"} to cart`}
+        data-productid={product.id}
+        aria-label={`Add one ${name} to cart`}
       >
         <Icon name="plus" width="16" height="16" />
       </button>
