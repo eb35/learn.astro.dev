@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/vercel": "^8.1.1",
+    "@stripe/stripe-js": "^5.10.0",
     "astro": "^5.4.2",
     "astro-icon": "^1.1.5",
     "stripe": "^17.7.0",
